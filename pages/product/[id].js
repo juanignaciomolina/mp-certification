@@ -19,7 +19,7 @@ export default function Product() {
   if (!product) return null;
 
   return (
-    <Page title={product?.name || "Producto"}>
+    <Page title={product?.name || "Producto"} view="item">
       <VStack w="100%">
         <Header />
         <Center w="100%" h="100%">

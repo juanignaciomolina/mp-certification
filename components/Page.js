@@ -1,8 +1,10 @@
 import Head from "next/head";
+import Script from "next/script";
 
 export default function Page({
-  title = "Mobile Store 2021",
+  title = "Piña Store",
   description = "Smarthpones and more...",
+  view = "home",
   children,
 }) {
   return (
@@ -12,6 +14,11 @@ export default function Page({
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script
+        src="https://www.mercadopago.com/v2/security.js"
+        view={view}
+        strategy="beforeInteractive"
+      ></Script>
       {children}
     </div>
   );
