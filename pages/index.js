@@ -54,7 +54,7 @@ const Product = ({ id, name, price, pictureUrl }) => {
             width="300px"
             objectFit="contain"
           />
-          <Text>
+          <Text fontSize="lg">
             <b>{name}</b>
           </Text>
           <Text>${new Intl.NumberFormat("es").format(price)}</Text>

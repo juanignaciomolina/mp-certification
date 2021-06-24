@@ -31,9 +31,13 @@ export default function Product() {
               width="300px"
               objectFit="contain"
             />
-            <VStack>
-              <Text>{product.name}</Text>
-              <Text>${new Intl.NumberFormat("es").format(product.price)}</Text>
+            <VStack justify="space-between">
+              <Text fontSize="3xl" maxW="500px" textAlign="center">
+                <b>{product.name}</b>
+              </Text>
+              <Text fontSize="lg">
+                ${new Intl.NumberFormat("es").format(product.price)}
+              </Text>
               <Button>Comprar</Button>
             </VStack>
           </HStack>
