@@ -25,12 +25,12 @@ export default function handler(req, res) {
       name: "Lalo",
       surname: "Landa",
       phone: {
-        area_code: "11",
-        number: "22223333",
+        area_code: 11,
+        number: 22223333,
       },
       address: {
         street_name: "Falsa",
-        street_number: "123",
+        street_number: 123,
         zip_code: "1111",
       },
     },
