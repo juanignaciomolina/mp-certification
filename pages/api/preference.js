@@ -17,7 +17,6 @@ export default function handler(req, res) {
         unit_price: 350000,
         quantity: 1,
         picture_url: `${PUBLIC_URL}/images/iphone_12.jpeg`,
-        external_reference: "juanimolina92@hotmail.com",
       },
     ],
     payer: {
@@ -34,18 +33,21 @@ export default function handler(req, res) {
         zip_code: "1111",
       },
     },
-    excluded_payment_methods: [
-      {
-        id: "amex",
-      },
-    ],
-    excluded_payment_types: [
-      {
-        id: "atm",
-      },
-    ],
+    payment_methods: {
+      excluded_payment_methods: [
+        {
+          id: "amex",
+        },
+      ],
+      excluded_payment_types: [
+        {
+          id: "atm",
+        },
+      ],
+      installments: 6,
+    },
+    external_reference: "juanimolina92@hotmail.com",
     auto_return: "approved",
-    installments: 6,
     back_urls: {
       success: `${PUBLIC_URL}/payment/success`,
       failure: `${PUBLIC_URL}/payment/failure`,
