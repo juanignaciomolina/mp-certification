@@ -57,9 +57,10 @@ const BuyButton = () => {
     useState(true);
 
   const getPreferenceId = async () =>
-    fetch(`${PUBLIC_URL}/api/preference`).then((response) =>
-      Promise.resolve(response.body.preferenceId)
-    );
+    fetch(`${PUBLIC_URL}/api/preference`).then((response) => {
+      console.log(response.body);
+      return Promise.resolve(response.body.preferenceId);
+    });
 
   const checkoutWithMercadoPago = (preferenceId) => {
     mercadoPagoClient.checkout({
