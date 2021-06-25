@@ -68,7 +68,6 @@ export default function handler(req, res) {
         .then(() => Promise.resolve(response))
     )
     .then((response) => {
-      res.set("Access-Control-Allow-Origin", "*"); // Allow CORS
       res.status(200).json({ preferenceId: response.body.id });
     });
 }
