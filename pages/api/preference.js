@@ -25,7 +25,7 @@ export default function handler(req, res) {
       name: "Lalo",
       surname: "Landa",
       phone: {
-        area_code: 11,
+        area_code: "11",
         number: 22223333,
       },
       address: {
