@@ -52,9 +52,9 @@ export default function Product() {
 const BuyButton = () => {
   const toast = useToast();
   const [doingCheckout, setDoingCheckout] = useState(false);
+  const [mercadoPagoClient, setMercadoPagoClient] = useState(false);
   const [loadingMercadoPagoClient, setLoadingMercadoPagoClient] =
     useState(true);
-  let mercadoPagoClient;
 
   const getPreferenceId = async () =>
     fetch(`${PUBLIC_URL}/api/preference`)
@@ -69,8 +69,8 @@ const BuyButton = () => {
       preference: {
         id: preferenceId,
       },
+      autoOpen: true, // Open MercadoPago checkout immediately
     });
-    mercadoPagoClient.open();
   };
 
   const doCheckout = () => {
@@ -102,9 +102,11 @@ const BuyButton = () => {
         src="https://sdk.mercadopago.com/js/v2"
         strategy="afterInteractive"
         onLoad={() => {
-          mercadoPagoClient = new window.MercadoPago(MERCADOPAGO_PUBLIC_KEY, {
-            locale: "es-AR",
-          });
+          setMercadoPagoClient(
+            new window.MercadoPago(MERCADOPAGO_PUBLIC_KEY, {
+              locale: "es-AR",
+            })
+          );
           setLoadingMercadoPagoClient(false);
         }}
       ></Script>
