@@ -18,7 +18,7 @@ export default function PaymentSuccess() {
           <Text>
             <b>Detalles del pago</b>
           </Text>
-          <SimpleGrid>
+          <SimpleGrid columns={2}>
             <Text>Payment ID</Text>
             <Text>{router.query.collection_id}</Text>
 
