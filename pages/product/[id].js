@@ -53,6 +53,8 @@ const BuyButton = () => {
   const toast = useToast();
   const [doingCheckout, setDoingCheckout] = useState(false);
   const [mercadoPagoClient, setMercadoPagoClient] = useState();
+  const [loadingMercadoPagoClient, setLoadingMercadoPagoClient] =
+    useState(true);
 
   const getPreferenceId = async () => {
     fetch(`${PUBLIC_URL}/api/preference`)
@@ -72,7 +74,10 @@ const BuyButton = () => {
     setDoingCheckout(true);
 
     getPreferenceId()
-      .then((preferenceId) => checkoutWithMercadoPago(preferenceId))
+      .then((preferenceId) => {
+        console.log(`PREFERENCE ID: ${preferenceId}`);
+        checkoutWithMercadoPago(preferenceId);
+      })
       .catch((error) => {
         console.log(error);
         showErrorToast();
@@ -95,17 +100,18 @@ const BuyButton = () => {
     <>
       <Script
         src="https://sdk.mercadopago.com/js/v2"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         onLoad={() => {
           setMercadoPagoClient(
             new window.MercadoPago(MERCADOPAGO_PUBLIC_KEY, {
               locale: "es-AR",
             })
           );
+          setLoadingMercadoPagoClient(false);
         }}
       ></Script>
       <Button
-        isLoading={doingCheckout}
+        isLoading={doingCheckout || loadingMercadoPagoClient}
         onClick={() => doCheckout()}
         id="mercadoPagoCheckoutButton"
       >
