@@ -52,34 +52,32 @@ export default function Product() {
 const BuyButton = () => {
   const toast = useToast();
   const [doingCheckout, setDoingCheckout] = useState(false);
-  const [mercadoPagoClient, setMercadoPagoClient] = useState();
   const [loadingMercadoPagoClient, setLoadingMercadoPagoClient] =
     useState(true);
+  let mercadoPagoClient;
 
   const getPreferenceId = async () =>
     fetch(`${PUBLIC_URL}/api/preference`)
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        return Promise.resolve(data.preferenceId);
-      });
+      .then((data) => Promise.resolve(data.preferenceId));
 
   const checkoutWithMercadoPago = (preferenceId) => {
+    console.log(preferenceId);
+    console.log(mercadoPagoClient);
+
     mercadoPagoClient.checkout({
       preference: {
         id: preferenceId,
       },
     });
+    mercadoPagoClient.open();
   };
 
   const doCheckout = () => {
     setDoingCheckout(true);
 
     getPreferenceId()
-      .then((preferenceId) => {
-        console.log(`PREFERENCE ID: ${preferenceId}`);
-        checkoutWithMercadoPago(preferenceId);
-      })
+      .then((preferenceId) => checkoutWithMercadoPago(preferenceId))
       .catch((error) => {
         console.log(error);
         showErrorToast();
@@ -104,18 +102,15 @@ const BuyButton = () => {
         src="https://sdk.mercadopago.com/js/v2"
         strategy="afterInteractive"
         onLoad={() => {
-          setMercadoPagoClient(
-            new window.MercadoPago(MERCADOPAGO_PUBLIC_KEY, {
-              locale: "es-AR",
-            })
-          );
+          mercadoPagoClient = new window.MercadoPago(MERCADOPAGO_PUBLIC_KEY, {
+            locale: "es-AR",
+          });
           setLoadingMercadoPagoClient(false);
         }}
       ></Script>
       <Button
         isLoading={doingCheckout || loadingMercadoPagoClient}
         onClick={() => doCheckout()}
-        id="mercadoPagoCheckoutButton"
       >
         Comprar con MercadoPago
       </Button>
