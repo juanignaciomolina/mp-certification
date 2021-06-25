@@ -18,7 +18,7 @@ export default function Page({
         src="https://www.mercadopago.com/v2/security.js"
         view={view}
         strategy="beforeInteractive"
-      ></Script>
+      />
       {children}
     </div>
   );

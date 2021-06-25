@@ -1,8 +1,6 @@
 import { supabase } from "../../supabase";
-import { MERCADOPAGO_ACCESS_TOKEN } from "../../configuration";
+import { MERCADOPAGO_ACCESS_TOKEN, PUBLIC_URL } from "../../configuration";
 import mercadopago from "mercadopago";
-
-const PUBLIC_URL = "https://mp-certification.vercel.app";
 
 export default function handler(req, res) {
   mercadopago.configure({
@@ -70,6 +68,6 @@ export default function handler(req, res) {
         .then(() => Promise.resolve(response))
     )
     .then((response) => {
-      res.status(200).json({ preference: response.body });
+      res.status(200).json({ preferenceId: response.body.id });
     });
 }
