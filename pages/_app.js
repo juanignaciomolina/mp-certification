@@ -8,7 +8,11 @@ function MyApp({ Component, pageProps }) {
     <>
       {/* This is the only way for the MercadoPago certification bot to detect the security script*/}
       <Head>
-        <script src="https://www.mercadopago.com/v2/security.js" view="item" />
+        <Script
+          src="https://www.mercadopago.com/v2/security.js"
+          view="item"
+          strategy="beforeInteractive"
+        />
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />
