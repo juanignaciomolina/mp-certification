@@ -2,13 +2,16 @@ import { supabase } from "../../supabase";
 import { MERCADOPAGO_ACCESS_TOKEN } from "../../configuration";
 
 export default async function handler(req, res) {
-  res.status(200);
+  // Must return 200 ASAP to avoid a timout. See: https://www.mercadopago.com.ar/developers/es/guides/notifications/webhooks
+  res
+    .status(200)
+    .json({ status: "Notification acknowledged and being processed..." });
 
-  const notification = req.body;
+  await processNotification(req.body);
+}
+
+async function processNotification(notification) {
   const paymentId = notification.data.id;
-
-  console.log(notification);
-  console.log(paymentId);
 
   const paymentData = await fetch(
     `https://api.mercadopago.com/v1/payments/${paymentId}`,
@@ -30,8 +33,6 @@ export default async function handler(req, res) {
       );
     }
   });
-
-  console.log(paymentData);
 
   await supabase.from("notifications").insert(
     { paymentId: paymentId, notification: notification, payment: paymentData },
