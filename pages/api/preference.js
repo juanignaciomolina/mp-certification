@@ -69,8 +69,8 @@ export default async function handler(req, res) {
         )
         .then(() => Promise.resolve(response.body.id))
     )
-    .then((response) => {
-      res.status(200).json({ preferenceId: response.body.id });
+    .then((preferenceId) => {
+      res.status(200).json({ preferenceId: preferenceId });
     });
 
   return Promise.resolve();
