@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     .status(200)
     .json({ status: "Notification acknowledged and being processed..." });
 
-  await processNotification(req.body);
+  return processNotification(req.body);
 }
 
 async function processNotification(notification) {
