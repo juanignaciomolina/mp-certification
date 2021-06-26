@@ -6,12 +6,9 @@ import Head from "next/head";
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      {/* This is the only way for the MercadoPago certification bot to detect the security script*/}
       <Head>
-        <Script
-          src="https://www.mercadopago.com/v2/security.js"
-          view="item"
-          strategy="beforeInteractive"
-        />
+        <script src="https://www.mercadopago.com/v2/security.js" view="item" />
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />
