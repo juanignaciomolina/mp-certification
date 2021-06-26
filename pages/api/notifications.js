@@ -1,4 +1,5 @@
 import { supabase } from "../../supabase";
+import { MERCADOPAGO_ACCESS_TOKEN } from "../../configuration";
 
 export default function handler(req, res) {
   res.status(200);
@@ -12,7 +13,7 @@ export default function handler(req, res) {
   fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
     method: "get",
     headers: new Headers({
-      Authorization: `Bearer ${mercadoPagoAccessToken}`,
+      Authorization: `Bearer ${MERCADOPAGO_ACCESS_TOKEN}`,
     }),
   })
     .then((response) => {
