@@ -2,7 +2,7 @@ import { supabase } from "../../supabase";
 import { MERCADOPAGO_ACCESS_TOKEN, PUBLIC_URL } from "../../configuration";
 import mercadopago from "mercadopago";
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   mercadopago.configure({
     access_token: MERCADOPAGO_ACCESS_TOKEN,
   });
@@ -56,7 +56,7 @@ export default function handler(req, res) {
     notification_url: `${PUBLIC_URL}/api/notifications?source_news=webhooks`,
   };
 
-  mercadopago.preferences
+  await mercadopago.preferences
     .create(preference)
     .then((response) =>
       supabase
@@ -67,9 +67,11 @@ export default function handler(req, res) {
             returning: "minimal", // Don't return the value after inserting
           }
         )
-        .then(() => Promise.resolve(response))
+        .then(() => Promise.resolve(response.body.id))
     )
     .then((response) => {
       res.status(200).json({ preferenceId: response.body.id });
     });
+
+  return Promise.resolve();
 }
