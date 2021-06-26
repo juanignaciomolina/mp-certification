@@ -3,3 +3,4 @@ export const MERCADOPAGO_ACCESS_TOKEN =
 export const MERCADOPAGO_PUBLIC_KEY =
   "APP_USR-7eb0138a-189f-4bec-87d1-c0504ead5626";
 export const PUBLIC_URL = "https://mp-certification.vercel.app";
+export const INTEGRATOR_ID = "dev_24c65fb163bf11ea96500242ac130004";

@@ -1,10 +1,15 @@
 import { supabase } from "../../supabase";
-import { MERCADOPAGO_ACCESS_TOKEN, PUBLIC_URL } from "../../configuration";
+import {
+  MERCADOPAGO_ACCESS_TOKEN,
+  PUBLIC_URL,
+  INTEGRATOR_ID,
+} from "../../configuration";
 import mercadopago from "mercadopago";
 
 export default async function handler(req, res) {
   mercadopago.configure({
     access_token: MERCADOPAGO_ACCESS_TOKEN,
+    integrator_id: INTEGRATOR_ID,
   });
 
   // PREFERENCE DATA HARDCODED AS DESCRIBED BY THE CHALLANGE SPECS
