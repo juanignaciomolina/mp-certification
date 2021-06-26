@@ -13,6 +13,17 @@ export default function Product() {
   const router = useRouter();
   const [product, setProduct] = useState();
 
+  {
+    /* This is the only way for the MercadoPago certification bot to detect the security script*/
+  }
+  //useEffect(() => {
+  //  const script = document.createElement("script");
+  //  script.src = "https://www.mercadopago.com/v2/security.js";
+  //  script.async = true;
+  //  script.setAttribute("view", "item");
+  //  document.getElementById("__next").appendChild(script);
+  //}, []);
+
   useEffect(() => {
     if (router.query.id)
       getProduct(router.query.id).then((result) => setProduct(result));
@@ -98,6 +109,11 @@ const BuyButton = () => {
 
   return (
     <>
+      <Script
+        src="https://www.mercadopago.com/v2/security.js"
+        view="item"
+        strategy="afterInteractive"
+      ></Script>
       <Script
         src="https://sdk.mercadopago.com/js/v2"
         strategy="afterInteractive"
