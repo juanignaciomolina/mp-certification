@@ -51,7 +51,7 @@ export default async function handler(req, res) {
       ],
       installments: 6,
     },
-    external_reference: "juanimolina92@hotmail.com",
+    external_reference: "juanignaciomln@gmail.com",
     auto_return: "approved",
     back_urls: {
       success: `${PUBLIC_URL}/payment/success`,

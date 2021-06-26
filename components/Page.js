@@ -14,11 +14,6 @@ export default function Page({
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Script
-        src="https://www.mercadopago.com/v2/security.js"
-        view={view}
-        strategy="beforeInteractive"
-      />
       {children}
     </div>
   );

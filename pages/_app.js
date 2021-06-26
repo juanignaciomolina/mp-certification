@@ -1,9 +1,15 @@
 import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Script
+        src="https://www.mercadopago.com/v2/security.js"
+        view="item"
+        strategy="beforeInteractive"
+      />
       <ChakraProvider>
         <Component {...pageProps} />
       </ChakraProvider>
